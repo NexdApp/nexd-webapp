@@ -4,15 +4,9 @@ const state = {
 };
 
 const getters = {
-  //   currentUser(state) {
-  //     return state.user;
-  //   },
   getUsers(state) {
     return state.users;
   }
-  //   isAuthenticated(state) {
-  //     return state.isAuthenticated;
-  //   }
 };
 const mutations = {
   setUsers: (state, users) => {
@@ -36,4 +30,5 @@ const actions = {
     });
   }
 };
+
 export default { state, actions, mutations, getters };

@@ -1,9 +1,7 @@
 import ApiService from "../commons/services";
 import JwtService from "../commons/jwt-service";
-console.log(JwtService.getToken());
 const state = {
   errors: null,
-  user: {},
   isAuthenticated: !!JwtService.getToken()
 };
 
@@ -24,7 +22,7 @@ const mutations = {
   setError: (state, error) => {
     state.errors = error;
   },
-  PURGE_AUTH: state => {
+  purgeAuth: state => {
     state.isAuthenticated = false;
     state.user = {};
     state.errors = {};
@@ -44,6 +42,9 @@ const actions = {
           context.commit("setError", response.data.errors);
         });
     });
+  },
+  logout(context) {
+    context.commit("purgeAuth");
   }
 };
 export default { state, actions, mutations, getters };

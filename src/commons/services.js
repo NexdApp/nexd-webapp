@@ -13,7 +13,6 @@ const ApiService = {
 
   query(resource, params) {
     this.setHeader();
-    console.log(resource, params);
     return Vue.axios.get(resource, params).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
@@ -28,7 +27,6 @@ const ApiService = {
 
   post(resource, params) {
     this.setHeader();
-    console.log(resource, params);
     return Vue.axios.post(`${resource}`, params);
   },
 
