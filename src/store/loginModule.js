@@ -6,9 +6,6 @@ const state = {
 };
 
 const getters = {
-  currentUser(state) {
-    return state.user;
-  },
   isAuthenticated(state) {
     return state.isAuthenticated;
   }
@@ -31,11 +28,25 @@ const mutations = {
 };
 
 const actions = {
+  signup(context, payload) {
+    return new Promise(resolve => {
+      ApiService.post("/api/auth/register", payload)
+        .then(({ data }) => {
+          context.commit("setAuth", data.accessToken);
+          context.commit("setUserId", data.id);
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          context.commit("setError", response.data.errors);
+        });
+    });
+  },
   login(context, payload) {
     return new Promise(resolve => {
       ApiService.post("/api/auth/login", payload)
         .then(({ data }) => {
           context.commit("setAuth", data.accessToken);
+          context.commit("setUserId", data.id);
           resolve(data);
         })
         .catch(({ response }) => {
